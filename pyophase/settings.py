@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'formtools',
+    'phonenumber_field',
     'ophasebase',
     'website',
     'dashboard',
@@ -105,6 +106,8 @@ DATABASES = {
 LANGUAGE_CODE = 'de-de'
 
 TIME_ZONE = 'Europe/Berlin'
+
+PHONENUMBER_DEFAULT_REGION = 'DE'
 
 USE_I18N = True
 

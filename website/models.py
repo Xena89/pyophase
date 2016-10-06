@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from django.template.defaultfilters import date as _date
 from django.utils.translation import ugettext_lazy as _
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 class Settings(models.Model):
     """Configuration for Website App."""
@@ -15,7 +17,7 @@ class Settings(models.Model):
         verbose_name = _("Einstellungen")
         verbose_name_plural = _("Einstellungen")
 
-    helpdesk_phone_number = models.CharField(max_length=50)
+    helpdesk_phone_number = PhoneNumberField()
     vorkurs_start_date = models.DateField()
     vorkurs_end_date = models.DateField()
     vorkurs_url = models.URLField()

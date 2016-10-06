@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 from ophasebase.models import Ophase
 
 
@@ -58,7 +60,7 @@ class Person(models.Model):
     prename = models.CharField(max_length=60, verbose_name=_('first name'))
     name = models.CharField(max_length=75, verbose_name=_('last name'))
     email = models.EmailField(verbose_name=_("E-Mail-Adresse"))
-    phone = models.CharField(max_length=30, verbose_name=_("Handynummer"), help_text=_("Deine Handynummer brauchen wir um dich schnell erreichen zu können."))
+    phone = PhoneNumberField(verbose_name=_("Handynummer"), help_text=_("Deine Handynummer brauchen wir um dich schnell erreichen zu können."))
     matriculated_since = models.CharField(max_length=30, verbose_name=_("An der Uni seit"), help_text=_("Seit wann studierst du an der TU Darmstadt?"))
     degree_course = models.CharField(max_length=50, verbose_name=_("Aktuell angestrebter Abschluss"), help_text=_("Bachelor, Master, Joint Bachelor of Arts, etc."))
     experience_ophase = models.TextField(verbose_name=_("Bisherige Ophasenerfahrung"), help_text=_("Wenn du schonmal bei einer Ophase geholfen hast, schreib uns wann das war und was du gemacht hast."))

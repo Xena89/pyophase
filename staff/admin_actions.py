@@ -78,7 +78,7 @@ def staff_overview_export(modeladmin, request, queryset):
     common_header = [_('Vorname'), _('Nachname'), _('E-Mail'), _('Handy'),]
 
     for person in queryset:
-        row = [person.prename, person.name, person.email, person.phone]
+        row = [person.prename, person.name, person.email, person.phone.as_national]
         if person.is_tutor:
             tutors.append(row + [str(person.tutor_for)])
         if person.is_orga:
@@ -169,7 +169,7 @@ def tutorgroup_export(modeladmin, request, queryset):
     for group in queryset.order_by('name'):
         row = [group.name, 'icon_' + group.name.lower()]
         for tutor in group.tutors.all():
-            row.extend([str(tutor), tutor.phone])
+            row.extend([str(tutor), tutor.phone.as_national])
         table.append(row)
 
     out_stream = io.BytesIO()

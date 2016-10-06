@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils.html import escape, format_html
 from django.utils.translation import ugettext as _
 
+from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
+
 from .models import GroupCategory, HelperJob, OrgaJob, Person, Settings
 
 
@@ -65,7 +67,7 @@ class PersonForm(forms.ModelForm):
 
         widgets = {
             # set type for the phone field to tel. This might be done better
-            'phone': forms.TextInput(attrs={'type': 'tel'}),
+            'phone': PhoneNumberInternationalFallbackWidget,
             # use checkboxes for multipleChoice @see http://stackoverflow.com/a/16937145
             'orga_jobs': forms.CheckboxSelectMultiple,
             'helper_jobs': forms.CheckboxSelectMultiple

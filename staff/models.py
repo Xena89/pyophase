@@ -54,6 +54,17 @@ class OrgaJob(Job):
 
 class HelperJob(Job):
     """Job for a helper."""
+
+    minimum_number_required = models.PositiveSmallIntegerField(verbose_name=_("Minimal benötigte Anzahl an Helfern"), default=1)
+    optimal_number_needed = models.PositiveSmallIntegerField(verbose_name=_("Optimal benötigte Anzahl an Helfern"), default=2)
+
+    def clean(self):
+        super(HelperJob, self).clean()
+        if self.optimal_number_needet < self.minimum_number_required:
+            raise ValidationError(
+                _("Die optimale Anzahl kann nicht kleiner als die minimale Anzahl an Helfern sein!"),
+            code='optimal_number-smaller-minimum_number')
+
     class Meta:
         verbose_name = _("Helferjob")
         verbose_name_plural = _("Helferjobs")

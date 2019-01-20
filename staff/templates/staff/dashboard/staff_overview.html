@@ -76,16 +76,18 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{% trans "Job" %}</th>
+            <th>{% trans "Job" %} ({% trans "minimale/optimale Anzahl" %})</th>
             <th>{% trans "Eingeteilt" %}</th>
             <th>{% trans "Interessiert" %}</th>
         </tr>
         </thead>
         {% for hj in helper_jobs %}
             <tr>
-                <td><a href="{% url "admin:staff_helperselectedjob_changelist" %}{{ hj.filter }}">{{ hj.job.label }}</a></td>
+                <td><a href="{% url "admin:staff_helperselectedjob_changelist" %}{{ hj.filter }}">{{ hj.job.label }}</a>
+                ({{ hj.job.minimum_number_required }}/{{ hj.job.optimal_number_needed }})</td>
                 {% for state in hj.states %}
                     <td>{% for o in state %}
+                        ({{ state|length }})
                         <a href="{% url "admin:staff_helperselectedjob_change" object_id=o.id %}">
                             {{ o.person.get_name }}{% if not forloop.last %},{% endif %}</a>
                    {% endfor %}</td>
